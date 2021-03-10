@@ -1,6 +1,6 @@
 ## IBDocuments Crawler
 
-This is a simple crawler to get past papers from [ibdocuments](https://ibdocuments.com). To get started download the binary from the [releases tab]() and run it. This will create a folder with the papers for the subject you chose in the same directory where the executable is (so most likely your downloads folder). This is a V1 so the downloading is pretty slow, either download in small batches or let it run overnight :)
+This is a simple crawler to get past papers from [ibdocuments](https://ibdocuments.com). To get started download the binary from the [releases tab](https://github.com/jakcharvat/ibdocuments_crawler/releases/) and run it. This will create a folder with the papers for the subject you chose in the same directory where the executable is (so most likely your downloads folder). This is a V1 so the downloading is pretty slow, either download in small batches or let it run overnight :)
 
 Also, eventually I wanna be able to crawl more stuff than just past papers, but again, V1. 
 
