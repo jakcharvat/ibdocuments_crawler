@@ -1,4 +1,5 @@
 import { DOMParser, Element, Node } from 'https://deno.land/x/deno_dom/deno-dom-wasm.ts'
+import { ensureDir } from 'https://deno.land/std@0.90.0/fs/mod.ts'
 
 async function ask(
     question = '',
@@ -151,11 +152,8 @@ async function getPastPapers() {
     }
 
     const dirname = subjects[subjectIdx].replace(/^[0-9]+: /g, '')
-    const p = Deno.run({
-        cmd: ['mkdir', `${dirname}`]
-    })
-    await p.status()
-    p.close()
+
+    await ensureDir(dirname)
 
     for (let idx = examIdx; idx < exams.length; idx++) {
         const examName = exams[idx].replace(/^[0-9]+: /g, '')
@@ -173,12 +171,7 @@ async function getPastPapers() {
             return
         }
         
-        const p = Deno.run({
-            cwd: dirname,
-            cmd: ['mkdir', examName]
-        })
-        await p.status()
-        p.close()
+        await ensureDir(`${dirname}/${examName}`)
 
         const selector = 'table#indexlist tr:not(.even-parentdir) td.indexcolname a'
         const papers = Array.from(sessionDom.querySelectorAll(selector))
@@ -186,14 +179,13 @@ async function getPastPapers() {
         for (const paper of papers) {
             const el = paper as Element
             const href = link + el.getAttribute('href')
+            const paperName = el.textContent
 
-            const p = Deno.run({
-                cwd: `${dirname}/${examName}`,
-                cmd: ['curl', '-O', href],
-                stdout: "null"
-            })
-            await p.status()
-            p.close()
+            Deno.stdout.writeSync(new TextEncoder().encode(`Downloading ${paperName}...`))
+            const res = await fetch(href)
+            const file = new Uint8Array(await res.arrayBuffer())
+            await Deno.writeFile(`${dirname}/${examName}/${paperName}`, file)
+            console.log('done')
         }
 
         console.log('done')
