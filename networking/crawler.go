@@ -1,13 +1,13 @@
 package networking
 
 import (
-	"fmt"
-	"io/ioutil"
-	"net/http"
-	"regexp"
-	"strings"
+  "fmt"
+  "io/ioutil"
+  "net/http"
+  "regexp"
+  "strings"
 
-	"github.com/PuerkitoBio/goquery"
+  "github.com/PuerkitoBio/goquery"
 )
 
 type Link struct {

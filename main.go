@@ -1,9 +1,9 @@
-package main
+  package main
 
 import (
-	"fmt"
+  "fmt"
 
-	"jakcharvat.dev/ibdocuments-crawler/networking"
+  "jakcharvat.dev/ibdocuments-crawler/networking"
 )
 
 
