@@ -25,3 +25,5 @@ cli/tests/.test_coverage/
 # MacOS generated files
 .DS_Store
 .DS_Store?
+
+Downloaded/
